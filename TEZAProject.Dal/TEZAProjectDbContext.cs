@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TEZAProject.Domain;
 using TEZAProject.Domain.Auth;
 
+
 namespace TEZAProject.Dal
 {
      public class TEZAProjectDbContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
@@ -16,6 +17,19 @@ namespace TEZAProject.Dal
           }
 
           public DbSet<UserProfile> UserProfiles { get; set; }
+
+          protected override void OnModelCreating(ModelBuilder builder)
+          {
+               
+               base.OnModelCreating(builder);
+
+               builder.Entity<User>()
+                    .HasOne(p => p.UserProfile)
+                    .WithOne(b => b.User)
+                    .HasForeignKey<UserProfile>(x => x.UserId);
+
+
+          }
 
      }
 }

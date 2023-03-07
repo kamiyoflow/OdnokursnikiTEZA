@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TEZAProject.Dal;
 
@@ -11,9 +12,11 @@ using TEZAProject.Dal;
 namespace TEZAProject.Dal.Migrations
 {
     [DbContext(typeof(TEZAProjectDbContext))]
-    partial class TEZAProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230303190716_IdentityUpdate1")]
+    partial class IdentityUpdate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,6 +95,7 @@ namespace TEZAProject.Dal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 

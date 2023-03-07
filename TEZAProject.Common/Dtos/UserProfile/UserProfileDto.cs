@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TEZAProject.Common.Dtos
+namespace TEZAProject.Common.Dtos.UserProfile
 {
-     public class UserProfileForUpdateDto
+     public class UserProfileDto
      {
+          public int Id { get; set; }
           public string FirstName { get; set; }
           public string LastName { get; set; }
+          public string Email { get; set; }
           public int Age { get; set; }
           public DateTime Created { get; set; }
      }

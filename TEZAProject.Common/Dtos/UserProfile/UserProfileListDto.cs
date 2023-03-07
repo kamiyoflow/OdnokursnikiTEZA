@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TEZAProject.Common.Dtos
+namespace TEZAProject.Common.Dtos.UserProfile
 {
-     public class UserProfileDto
+     public class UserProfileListDto
      {
           public int Id { get; set; }
           public string FirstName { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TEZAProject.Bll.Interfaces;
-using TEZAProject.Common.Dtos;
+using TEZAProject.Common.Dtos.Account;
+using TEZAProject.Common.Dtos.UserProfile;
 
 namespace TEZAProject.API.Controllers
 {
@@ -29,12 +30,12 @@ namespace TEZAProject.API.Controllers
                return userProfileDtos;
           }
 
-          [HttpPost]
-          public async Task<IActionResult> CreateUserProfileAsync(UserProfileForUpdateDto userProfileForUpdateDto)
-          {
-               await _userProfileService.CreateUserProfileAsync(userProfileForUpdateDto);
-               return Ok(userProfileForUpdateDto);
-          }
+          //[HttpPost]
+          //public async Task<IActionResult> CreateUserProfileAsync(AccountForRegistrationDto userDto)
+          //{
+          //     await _userProfileService.CreateUserProfileAsync(userDto);
+          //     return Ok(userDto);
+          //}
 
           [HttpPut]
           public async Task<IActionResult> UpdateUserProfileAsync(int id, UserProfileForUpdateDto userProfileForUpdateDto)

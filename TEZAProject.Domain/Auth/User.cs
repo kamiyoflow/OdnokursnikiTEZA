@@ -9,5 +9,6 @@ namespace TEZAProject.Domain.Auth
 {
      public class User : IdentityUser<int>
      {
+          public UserProfile UserProfile { get; set; }
      }
 }

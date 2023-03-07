@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TEZAProject.Bll.Interfaces;
-using TEZAProject.Common.Dtos;
+using TEZAProject.Common.Dtos.Account;
+using TEZAProject.Common.Dtos.UserProfile;
 using TEZAProject.Dal.Interfaces;
 using TEZAProject.Domain;
 
@@ -23,7 +24,7 @@ namespace TEZAProject.Bll.Services
                _mapper = mapper;
           }
 
-          public async Task<UserProfileDto> CreateUserProfileAsync(UserProfileForUpdateDto userProfileForUpdateDto)
+          public async Task<UserProfileDto> CreateUserProfileAsync(AccountForRegistrationDto userProfileForUpdateDto)
           {
                var userProfile = _mapper.Map<UserProfile>(userProfileForUpdateDto);
 
