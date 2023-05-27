@@ -11,13 +11,13 @@ using TEZAProject.Domain;
 
 namespace TEZAProject.Dal.Repositories
 {
-     public class UserProfileRepository : IUserProfileRepository
+     public class Repository : IRepository
      {
 
           private readonly TEZAProjectDbContext _tezaProjectDbContext;
           private readonly IMapper _mapper;
 
-          public UserProfileRepository(TEZAProjectDbContext tezaProjectDbContext, IMapper mapper)
+          public Repository(TEZAProjectDbContext tezaProjectDbContext, IMapper mapper)
           {
                _tezaProjectDbContext = tezaProjectDbContext;
                _mapper = mapper;

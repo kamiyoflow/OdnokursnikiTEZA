@@ -42,7 +42,7 @@ namespace TEZAProject.API.Controllers
                          }
 
                          userDto.UserId = user.Id;
-                         var profileResult = await _userProfileService.CreateUserProfileAsync(userDto);
+                         await _userProfileService.CreateUserProfileAsync(userDto);
 
                          return Accepted();
           }

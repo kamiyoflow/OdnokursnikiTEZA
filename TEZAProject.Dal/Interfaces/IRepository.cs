@@ -2,7 +2,7 @@
 
 namespace TEZAProject.Dal.Interfaces
 {
-     public interface IUserProfileRepository
+     public interface IRepository
      {
           Task<TEntity> GetById<TEntity>(int id) where TEntity : BaseEntity;
           Task<List<TEntity>> GetAll<TEntity>() where TEntity : BaseEntity;

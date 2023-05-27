@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,26 +11,31 @@ using TEZAProject.Common.Dtos.Account;
 using TEZAProject.Common.Dtos.UserProfile;
 using TEZAProject.Dal.Interfaces;
 using TEZAProject.Domain;
+using TEZAProject.Domain.Auth;
 
 namespace TEZAProject.Bll.Services
 {
      public class UserProfileService : IUserProfileService
      {
-          private readonly IUserProfileRepository _userProfileRepository;
+          private readonly IRepository _repository;
           private readonly IMapper _mapper;
+          private readonly UserManager<User> _userManager;
 
-          public UserProfileService(IUserProfileRepository userProfileRepository, IMapper mapper)
+          public UserProfileService(IRepository repository, IMapper mapper, UserManager<User> userManager)
           {
-               _userProfileRepository = userProfileRepository;
+               _repository = repository;
                _mapper = mapper;
+               _userManager = userManager;
           }
 
           public async Task<UserProfileDto> CreateUserProfileAsync(AccountForRegistrationDto userProfileForUpdateDto)
           {
                var userProfile = _mapper.Map<UserProfile>(userProfileForUpdateDto);
 
-               _userProfileRepository.Add(userProfile);
-               await _userProfileRepository.SaveChangesAsync();
+               userProfile.User = await _userManager.FindByIdAsync(userProfile.UserId.ToString());
+
+               _repository.Add(userProfile);
+               await _repository.SaveChangesAsync();
 
                var userProfileDto = _mapper.Map<UserProfileDto>(userProfile);
                return userProfileDto;
@@ -37,13 +43,13 @@ namespace TEZAProject.Bll.Services
 
           public async Task DeleteUserProfileAsync(int id)
           {
-               await _userProfileRepository.Delete<UserProfile>(id);
-               await _userProfileRepository.SaveChangesAsync();
+               await _repository.Delete<UserProfile>(id);
+               await _repository.SaveChangesAsync();
           }
 
           public async Task<ICollection<UserProfileListDto>> GetAllUserProfileAsync()
           {
-               var userProfileList = await _userProfileRepository.GetAll<UserProfile>();
+               var userProfileList = await _repository.GetAll<UserProfile>();
                var userProfileListDto = new List<UserProfileListDto>();
                foreach(UserProfile profile in userProfileList)
                {
@@ -55,16 +61,16 @@ namespace TEZAProject.Bll.Services
 
           public async Task<UserProfileDto> GetUserProfileAsync(int id)
           {
-               var userProfile = await _userProfileRepository.GetById<UserProfile>(id);
+               var userProfile = await _repository.GetById<UserProfile>(id);
                var userProfileDto = _mapper.Map<UserProfileDto>(userProfile);
                return userProfileDto;
           }
 
           public async Task UpdateUserProfileAsync(int id, UserProfileForUpdateDto userProfileForUpdateDto)
           {
-               var userProfile = await _userProfileRepository.GetById<UserProfile>(id);
+               var userProfile = await _repository.GetById<UserProfile>(id);
                _mapper.Map(userProfileForUpdateDto, userProfile);
-               await _userProfileRepository.SaveChangesAsync();
+               await _repository.SaveChangesAsync();
           }
      }
 }

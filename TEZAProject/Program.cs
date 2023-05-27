@@ -24,7 +24,9 @@ builder.Services.AddDbContext<TEZAProjectDbContext>(options => options.UseSqlSer
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
-builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+builder.Services.AddScoped<IFeedService, FeedService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddAutoMapper(typeof(UserProfileProfile));
 
 builder.Services.AddIdentity<User, Role>()

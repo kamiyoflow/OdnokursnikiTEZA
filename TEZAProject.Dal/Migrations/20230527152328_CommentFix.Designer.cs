@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TEZAProject.Dal;
 
@@ -11,9 +12,10 @@ using TEZAProject.Dal;
 namespace TEZAProject.Dal.Migrations
 {
     [DbContext(typeof(TEZAProjectDbContext))]
-    partial class TEZAProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230527152328_CommentFix")]
+    partial class CommentFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
